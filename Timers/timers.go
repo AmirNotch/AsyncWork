@@ -19,9 +19,9 @@ func main() {
 	select {
 	case <- timer.C:
 		fmt.Println("timer.C timeout happened")
-	case <-time.After(time.Minute):
+	case <- time.After(2 * time.Second):
 		fmt.Println("time.After timeout happened")
-	case result := <-longSQLQuery():
+	case result := <- longSQLQuery():
 		if !timer.Stop() {
 			<- timer.C
 		}
